@@ -1,8 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { GiChefToque, GiForkKnifeSpoon } from "react-icons/gi";
+import {
+  FiBook,
+  FiHome,
+  FiPhone,
+  FiStar,
+  FiShoppingCart,
+  FiLogOut,
+  FiKey,
+} from "react-icons/fi";
 import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const navLinks = [
+    { name: "Home", to: "/", icon: <FiHome /> },
+    { name: "Menu", to: "/menu", icon: <FiBook /> },
+    { name: "About", to: "/about", icon: <FiStar /> },
+    { name: "Contact", to: "/contact", icon: <FiPhone /> },
+  ];
   return (
     <nav
       className="bg-[#2D1B0E] border-b-8 border-amber-900/30 shadow-amber-900/30 sticky
@@ -55,6 +72,37 @@ const Navbar = () => {
               mt-1 ml-1 shadow-[0-2px-5px] shadow-amber-500/20"
               />
             </div>
+          </div>
+
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-2 md:space-x-1 lg:space-x-4 flex-1 justify-end">
+            {navLinks.map((link) => (
+              <NavLink
+                key={link.name}
+                to={link.to}
+                className={({ isActive }) =>
+                  `group px-3 md:px-3 lg:px-4 py-2 md:py-2 lg:py-3 text-sm md:text-[15px] lg:text-base relative
+                transition-all duration-300 flex items-center hover:bg-amber-900/20 rounded-3xl border-2
+                 ${
+                   isActive
+                     ? "border-amber-600/50 bg-amber-900/20 shadow-[inset_0_0_15px] shadow-amber-500/20"
+                     : "border-amber-900/30 hover:border-amber-600/50"
+                 } shadow-md shadow-amber-900/20`
+                }
+              >
+                <span
+                  className="mr-2 text-sm md:text-[15px] lg:text-base 
+                text-amber-500 group-hover:text-amber-300 transition-all"
+                >
+                  {link.icon}
+                </span>
+                <span className="text-amber-100 group-hover:text-amber-300 relative">
+                  {link.name}
+                  <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-amber-400 transition-all
+                  group-hover:w-full"/>
+                </span>
+              </NavLink>
+            ))}
           </div>
         </div>
       </div>
