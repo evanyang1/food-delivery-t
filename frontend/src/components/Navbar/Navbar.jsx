@@ -10,9 +10,11 @@ import {
   FiKey,
 } from "react-icons/fi";
 import { NavLink } from "react-router-dom";
+import { useCart } from "../../CartContext/CartContext.jsx";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { totalItems } = useCart();
 
   const navLinks = [
     { name: "Home", to: "/", icon: <FiHome /> },
@@ -98,11 +100,27 @@ const Navbar = () => {
                 </span>
                 <span className="text-amber-100 group-hover:text-amber-300 relative">
                   {link.name}
-                  <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-amber-400 transition-all
-                  group-hover:w-full"/>
+                  <span
+                    className="absolute -bottom-1 left-0 w-0 h-[2px] bg-amber-400 transition-all
+                  group-hover:w-full"
+                  />
                 </span>
               </NavLink>
             ))}
+            <div
+              className="flex items-center space-x-2 md:space-x-3 lg:space-x-4 ml-3
+            md:ml-3 lg:ml-6 mr-2 md:mr-3 lg:mr-4"
+            >
+              <NavLink
+                to="/cart"
+                className="p-2 md:p-2.0 lg:p-3 text-amber-100 rounded-x1 transition-all 
+              relative border-2 border-amber-900/30 hover:border-amber-600/50
+              group hover:amber-900/20 hover:shadow-lg hover:shadow-amber-500/30 shadow-md shadow-amber-900/20"
+              >
+                <FiShoppingCart className="text-base md:text-lg lg:text-lg " />
+                {}
+              </NavLink>
+            </div>
           </div>
         </div>
       </div>
