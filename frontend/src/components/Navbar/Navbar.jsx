@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { GiChefToque, GiForkKnifeSpoon } from "react-icons/gi";
 import {
   FiBook,
@@ -9,14 +9,60 @@ import {
   FiLogOut,
   FiKey,
 } from "react-icons/fi";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useCart } from "../../CartContext/CartContext.jsx";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
   const { totalItems } = useCart();
   const [showLoginModal, setShowLoginModal] = useState(false);
+
+  // Combine updating login modal and auth status on location change
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    Boolean(localStorage.getItem("loginData"))
+  );
+  useEffect(() => {
+    setShowLoginModal(location.pathname === "/login");
+    setIsAuthenticated(Boolean(localStorage.getItem("loginData")));
+  }, [location.pathname]);
+
+  const handleLoginSuccess = () => {
+    localStorage.setItem("loginData", JSON.stringify({ loggedIn: true }));
+    setIsAuthenticated(true);
+    navigate("/");
+  };
+  const handleLogout = () => {
+    localStorage.removeItem("loginData");
+    setIsAuthenticated(false);
+  };
+  // Extract desktop auth button
+  const renderDesktopAuthButton = () => {
+    return isAuthenticated ? (
+      <button
+        onClick={handleLogout}
+        className="px-3 md:px-3 lg:px-6 py-1.5 md:py-2 lg:py-3 bg-gradient-to-r 
+      from-amber-600 to-amber-700 text-[#2D1B0E] rounded-2xl font-bold hover:shadow-lg hover:shadow-amber-600/40 
+      transition-all transform hover:scale-[1.02] border-2 border-amber-600/20 flex items-center space-x-2
+      shadow-md shadow-amber-900/20 text-xs md:text-sm lg:text-xs"
+      >
+        <FiLogOut className="text-base md:text-lg lg:text-lg" />
+        <span className="text-shadow">Logout</span>
+      </button>
+    ) : (
+      <button
+        onClick={() => navigate("/login")}
+        className="px-3 md:px-3 lg:px-6 py-1.5 md:py-2 lg:py-3 bg-gradient-to-r 
+      from-amber-600 to-amber-700 text-[#2D1B0E] rounded-2xl font-bold hover:shadow-lg hover:shadow-amber-600/40 
+      transition-all transform hover:scale-[1.02] border-2 border-amber-600/20 flex items-center space-x-2
+      shadow-md shadow-amber-900/20 text-xs md:text-sm lg:text-xs"
+      >
+        <FiKey className="text-base md:text-lg lg:text-lg" />
+        <span className="text-shadow">Login</span>
+      </button>
+    );
+  };
 
   const navLinks = [
     { name: "Home", to: "/", icon: <FiHome /> },
@@ -211,16 +257,26 @@ const Navbar = () => {
       {/* Login modal */}
       {showLoginModal && (
         <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4">
-          <div className="bg-gradient-to-br from-[#2D1B0E] to-[#4a372a] rounded-xl p-6
-          w-full max-w-[480px] relative border-4 border-amber-700/30 shadow-[0_0_30px] shadow-amber-500/30">
-            <button onClick={() => navigate('/')} 
-            className="absolute top-2 right-2 text-amber-500 hover:text-amber-300 text-2xl">
+          <div
+            className="bg-gradient-to-br from-[#2D1B0E] to-[#4a372a] rounded-xl p-6
+          w-full max-w-[480px] relative border-4 border-amber-700/30 shadow-[0_0_30px] shadow-amber-500/30"
+          >
+            <button
+              onClick={() => navigate("/")}
+              className="absolute top-2 right-2 text-amber-500 hover:text-amber-300 text-2xl"
+            >
               &times;
             </button>
-            <h2 className="text-2xl font-bold bg-gradient-to-r from-amber-400 to-amber-600
-            bg-clip-text text-transparent mb-4 text-center">
+            <h2
+              className="text-2xl font-bold bg-gradient-to-r from-amber-400 to-amber-600
+            bg-clip-text text-transparent mb-4 text-center"
+            >
               Foodie-Frenzy
             </h2>
+            <Login
+              onLoginSuccess={handleLoginSuccess}
+              onClose={() => useNavigate("/")}
+            />
           </div>
         </div>
       )}
