@@ -292,7 +292,7 @@ const Navbar = () => {
           >
             <button
               onClick={() => navigate("/")}
-              className="absolute top-2 right-2 text-amber-500 hover:text-amber-300 text-2xl"
+              className="absolute top-2 right-3 text-amber-500 hover:text-amber-300 text-2xl"
             >
               &times;
             </button>
