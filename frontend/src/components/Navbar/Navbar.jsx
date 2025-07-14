@@ -11,6 +11,7 @@ import {
 } from "react-icons/fi";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useCart } from "../../CartContext/CartContext.jsx";
+import Login from "../Login/Login.jsx";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -60,6 +61,32 @@ const Navbar = () => {
       >
         <FiKey className="text-base md:text-lg lg:text-lg" />
         <span className="text-shadow">Login</span>
+      </button>
+    );
+  };
+
+  // Extract mobile auth button
+  const renderMobileAuthButton = () => {
+    return isAuthenticated ? (
+      <button
+        onClick={handleLogout}
+        className="w-full px-4 py-3 bg-gradient-to-r from-amber-500 to-amber-700 
+      text-[#2D1B0E] rounded-xl font-semibold flex items-center justify-center space-x-2"
+      >
+        <FiLogOut />
+        <span>Logout</span>
+      </button>
+    ) : (
+      <button
+        onClick={() => {
+          navigate("/login");
+          setIsOpen(false);
+        }}
+        className="w-full px-4 py-3 bg-gradient-to-r from-amber-500 to-amber-700 
+      text-[#2D1B0E] rounded-xl font-semibold flex items-center justify-center space-x-2"
+      >
+        <FiKey />
+        <span>Login</span>
       </button>
     );
   };
@@ -175,6 +202,7 @@ const Navbar = () => {
                   </span>
                 )}
               </NavLink>
+              {renderDesktopAuthButton()}
             </div>
           </div>
 
@@ -249,6 +277,7 @@ const Navbar = () => {
                   </span>
                 )}
               </NavLink>
+              {renderMobileAuthButton()}
             </div>
           </div>
         </div>
