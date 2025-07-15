@@ -6,7 +6,7 @@ const Banner = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [showVideo, setShowVideo] = useState(false);
 
-  const { bannerImage } = bannerAssets;
+  const { bannerImage, orbitImages, video } = bannerAssets;
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -92,11 +92,37 @@ const Banner = () => {
           {/*right content: container with orbital images */}
           <div className="flex-1 relative group mt-8 md:mt-0 min-h-[300px] sm:min-h-[400px]">
             {/** main img */}
-            <div className="relative rounded-full p-1 bg-gradient-to-r from-amber-700 via-amber-800 to-amber-400
-            shadow-2xl z-20 w-[250px] xs:w-[300px] sm:w-[350px] h-[250px] xs:h-[300px] sm:h-[350px] mx-auto">
-              <img src={bannerImage} alt="Banner" className="rounded-full border-4 xs:border-8 border-amber-900/50
-              w-full h-full object-cover object-top" />
+            <div
+              className="relative rounded-full p-1 bg-gradient-to-r from-amber-700 via-amber-800 to-amber-400
+            shadow-2xl z-20 w-[250px] xs:w-[300px] sm:w-[350px] h-[250px] xs:h-[300px] sm:h-[350px] mx-auto"
+            >
+              <img
+                src={bannerImage}
+                alt="Banner"
+                className="rounded-full border-4 xs:border-8 border-amber-900/50
+              w-full h-full object-cover object-top"
+              />
+              <div className="absolute inset-0 rounded-full bg-gradient-to-b from-transparent to-amber-900/40 mix-blend-multiply " />
             </div>
+
+            {/** orbit images */}
+            {orbitImages.map((imgSrc, index) => {
+              const orbitClass =
+                index === 0 ? "orbit" : `orbit-delay-${index * 5}`;
+              return (
+                <div
+                  key={index}
+                  className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 ${orbitClass} w-[80px] xs:w-[100px] sm:w-[150px] h-[80px] xs:h-[100px] sm:h-[150px]`}
+                >
+                  <img
+                    src={imgSrc}
+                    alt={`Orbiting ${index + 1}`}
+                    className="w-full h-full rounded-full border border-amber-500/30 shadow-lg bg-amber-900/20 p-1 
+                    object-cover"
+                  />
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
