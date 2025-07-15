@@ -1,8 +1,13 @@
-import React from "react";
-import { FaSearch } from "react-icons/fa";
+import React, { useState } from "react";
+import { FaDownload, FaPlay, FaSearch } from "react-icons/fa";
+import { bannerAssets } from "../../assets/dummydata";
 
 const Banner = () => {
-  const [searchQuery, setSearchQuery] = React.useState("");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [showVideo, setShowVideo] = useState(false);
+
+  const { bannerImage } = bannerAssets;
+
   const handleSearch = (e) => {
     e.preventDefault();
     console.log("Search query:", searchQuery);
@@ -51,8 +56,47 @@ const Banner = () => {
                   className="w-full py-4 pr-6 bg-transparent outline-none placeholder-amber-200/70 text-lg
                   font-medium tracking-wide"
                 />
+                <button
+                  type="submit"
+                  className="mr-4 px-6 py-3 bg-gradient-to-r from-amber-400 to-amber-300 
+                rounded-lg font-semibold text-amber-900 hover:from-amber-300 hover:to-amber-200
+                transition-all duration-300 shadow-lg hover:shadow-amber-300/20"
+                >
+                  Search
+                </button>
               </div>
             </form>
+
+            <div className="flex flex-wrap gap-4 justify-center md:justify-start mt-6">
+              <button
+                className="group flex items-center gap-3 bg-amber-800/30 hover:bg-amber-800/50 px-6
+              py-3 rounded-xl transition-all duration-300 border-2 border-amber-700/50 hover:border-amber-400 backdrop-blur-sm"
+              >
+                <FaDownload className="text-xl text-amber-400 group-hover:animate-bounce" />
+                <span className="text-lg">Download App</span>
+              </button>
+              <button
+                onClick={() => setShowVideo(true)}
+                className="group flex items-center gap-3 bg-gradient-to-r from-amber-400 to-amber-300
+              hover:from-amber-300 hover:to-amber-200 px-6 py-3 rounded-xl transition-all duration-300 shadow-lg
+              hover:shadow-amber-300/30"
+              >
+                <FaPlay className="text-xl text-amber-900" />
+                <span className="text-lg text-amber-900 font-semibold">
+                  Watch Video
+                </span>
+              </button>
+            </div>
+          </div>
+
+          {/*right content: container with orbital images */}
+          <div className="flex-1 relative group mt-8 md:mt-0 min-h-[300px] sm:min-h-[400px]">
+            {/** main img */}
+            <div className="relative rounded-full p-1 bg-gradient-to-r from-amber-700 via-amber-800 to-amber-400
+            shadow-2xl z-20 w-[250px] xs:w-[300px] sm:w-[350px] h-[250px] xs:h-[300px] sm:h-[350px] mx-auto">
+              <img src={bannerImage} alt="Banner" className="rounded-full border-4 xs:border-8 border-amber-900/50
+              w-full h-full object-cover object-top" />
+            </div>
           </div>
         </div>
       </div>
