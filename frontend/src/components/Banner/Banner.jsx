@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaDownload, FaPlay, FaSearch } from "react-icons/fa";
+import { FaDownload, FaPlay, FaSearch, FaTimes } from "react-icons/fa";
 import { bannerAssets } from "../../assets/dummydata";
 
 const Banner = () => {
@@ -126,6 +126,28 @@ const Banner = () => {
           </div>
         </div>
       </div>
+
+      {/** Video Modal */}
+      {showVideo && (
+        <div
+          className="fixed inset-0 flex items-center justify-center z-50"
+          onClick={() => setShowVideo(false)}
+        >
+          <div className="relative w-full max-w-3xl p-4">
+            <button
+              className="absolute top-6 right-6 text-amber-400 hover:text-amber-300 text-3xl z-10 transition-all"
+              onClick={() => setShowVideo(false)}
+            >
+              <FaTimes />
+            </button>
+            <div className="w-full max-w-4xl mx-auto">
+              <video controls autoPlay className="w-full aspect-video object-contain rounded-lg shadow-2xl">
+                <source src={video} type="video/mp4" />
+              </video>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
