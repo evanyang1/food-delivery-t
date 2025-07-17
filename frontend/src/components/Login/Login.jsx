@@ -5,6 +5,7 @@ import {
   FaLock,
   FaEyeSlash,
   FaEye,
+  FaArrowRight,
 } from "react-icons/fa";
 import { iconClass, inputBase } from "../../assets/dummydata";
 
@@ -94,6 +95,27 @@ const Login = ({ onLoginSuccess, onClose }) => {
             {showPassword ? <FaEyeSlash /> : <FaEye />}
           </button>
         </div>
+
+        <div className="flex items-center">
+          <label className="flex items-center">
+            <input
+              type="checkbox"
+              name="rememberMe"
+              checked={formData.rememberMe}
+              onChange={handleChange}
+              className="form checkbox h-5 w-5 text-amber-600 bg-[#2D1B0E] border-amber-400 rounded
+            focus:ring-amber-600"
+            />
+            <span className="ml text-amber-100">Remember Me</span>
+          </label>
+        </div>
+
+        <button
+          className="w-full py-3 bg-gradient-to-r from-amber-400 to-amber-600 text-[#2D1B0E] font-bold
+        rounded-lg flex items-center justify-center gap-2 hover:scale-102 transition-transform"
+        >
+          Sign In <FaArrowRight />
+        </button>
       </form>
     </div>
   );
