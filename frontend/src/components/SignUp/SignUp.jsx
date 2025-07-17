@@ -1,0 +1,76 @@
+import React, { useEffect, useState } from "react";
+import { FaCheckCircle } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+
+const AwesomeToast = ({ message, icon }) => {
+  <div
+    className="animate-slide-in fixed bottom-6 right-6 flex items-center bg-gradient-to-br from-amber-500 to-amber-600
+  px-6 py-4 rounded-lg shadow-lg border-2 border-amber-300/20"
+  >
+    <span className="text-2xl mr-3 text-[#2D1B0E]">{icon}</span>
+    <span className="font-semibold text-[#2D1B0E]">{message}</span>
+    <span></span>
+  </div>;
+};
+
+const SignUp = () => {
+  const [showToast, setShowToast] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
+  const navigate = useNavigate();
+
+  // for toast
+  useEffect(() => {
+    if (showToast) {
+      const timer = setTimeout(() => {
+        setShowToast(false);
+        navigate("/login");
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [showToast, navigate]);
+
+  const toggleShowPassword = () => {
+    setShowPassword(prev => !prev);
+  };
+
+  const handleChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-[#1a120b] p-4">
+      {showToast && (
+        <AwesomeToast message="Sign up successful!" icon={<FaCheckCircle />} />
+      )}
+
+      <div
+        className="w-full max-w-md bg-gradient-to-br from-[#2D1B0E] to-[#4a372a] p-8 rounded-xl shadow-lg
+      border-4 border-amber-700/30 transform transition-all duration-300 hover:shadow-2xl"
+      >
+        <h1
+          className="text-3xl font-bold text-center bg-gradient-to-r from-amber-400 to-amber-600
+        bg-clip-text text-transparent mb-6 hover:scale-105 transition-transform"
+        >
+          Create Account
+        </h1>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <input
+            type="text"
+            name="username"
+            placeholder="Username"
+            value={FormData.username}
+            onChange={handleChange}
+            className="w-full px-4 py-3 rounded-lg bg-[#2D1B0E] text-amber-100 placeholder-amber-400 focus:outline-none
+           focus:ring-2 focus:ring-amber-600 transition-all duration-200 hover:scale-[1.02]"
+            required
+          />
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default SignUp;

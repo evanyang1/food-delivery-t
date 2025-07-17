@@ -6,8 +6,10 @@ import {
   FaEyeSlash,
   FaEye,
   FaArrowRight,
+  FaUserPlus,
 } from "react-icons/fa";
 import { iconClass, inputBase } from "../../assets/dummydata";
+import { Link } from "react-router-dom";
 
 const Login = ({ onLoginSuccess, onClose }) => {
   const [showToast, setShowToast] = useState(false);
@@ -117,6 +119,14 @@ const Login = ({ onLoginSuccess, onClose }) => {
           Sign In <FaArrowRight />
         </button>
       </form>
+
+      <div className="text-center">
+        <Link to='/signup' onClick={onClose} className="inline-flex items-center gap-2
+        text-amber-400 hover:text-amber-600 transition-colors" >
+          <FaUserPlus /> Create New Account
+        </Link>
+      </div>
+  
     </div>
   );
 };
