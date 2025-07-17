@@ -35,10 +35,17 @@ const SignUp = () => {
   }, [showToast, navigate]);
 
   const toggleShowPassword = () => {
-    setShowPassword(prev => !prev);
+    setShowPassword((prev) => !prev);
   };
 
-  const handleChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Sign Up Data:", formData);
+    setShowToast(true);
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#1a120b] p-4">
@@ -61,12 +68,34 @@ const SignUp = () => {
             type="text"
             name="username"
             placeholder="Username"
-            value={FormData.username}
+            value={formData.username}
             onChange={handleChange}
             className="w-full px-4 py-3 rounded-lg bg-[#2D1B0E] text-amber-100 placeholder-amber-400 focus:outline-none
            focus:ring-2 focus:ring-amber-600 transition-all duration-200 hover:scale-[1.02]"
             required
           />
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={formData.email}
+            onChange={handleChange}
+            className="w-full px-4 py-3 rounded-lg bg-[#2D1B0E] text-amber-100 placeholder-amber-400 focus:outline-none
+           focus:ring-2 focus:ring-amber-600 transition-all duration-200 hover:scale-[1.02]"
+            required
+          />
+          <div className="relative">
+            <input
+              type={showPassword ? "text" : "password"}
+              name="password"
+              placeholder="Password"
+              value={formData.password}
+              onChange={handleChange}
+              className="w-full px-4 py-3 rounded-lg bg-[#2D1B0E] text-amber-100 placeholder-amber-400 focus:outline-none
+           focus:ring-2 focus:ring-amber-600 transition-all duration-200 hover:scale-[1.02]"
+              required
+            />
+          </div>
         </form>
       </div>
     </div>
