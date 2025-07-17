@@ -36,7 +36,7 @@ const Login = ({ onLoginSuccess, onClose }) => {
     onLoginSuccess();
   };
 
-  const handleChange = ({ target: { name, value, checked } }) => {
+  const handleChange = ({ target: { name, value, type, checked } }) => {
     setFormData((prev) => ({
       ...prev,
       [name]: type === "checkbox" ? checked : value,
