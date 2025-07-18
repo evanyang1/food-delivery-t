@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { FaCheckCircle } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { FaCheckCircle, FaEyeSlash, FaEye, FaArrowLeft } from "react-icons/fa";
+import { Link, useNavigate } from "react-router-dom";
 
 const AwesomeToast = ({ message, icon }) => {
   <div
@@ -95,8 +95,40 @@ const SignUp = () => {
            focus:ring-2 focus:ring-amber-600 transition-all duration-200 hover:scale-[1.02]"
               required
             />
+            <button
+              className="absolute inset-y-0 right-4 flex items-center text-amber-400 hover:text-amber-600
+            transition-all transform hover:scale-125"
+              type="button"
+              onClick={toggleShowPassword}
+            >
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </button>
           </div>
+
+          <button
+            type="submit"
+            className="w-full py-3 bg-gradient-to-r from-amber-400 to-amber-600 text-[#2D1B0E] font-bold
+          rounded-lg hover:scale-105 transition-transform duration-300 hover:shadow-lg"
+          >
+            Sign Up
+          </button>
         </form>
+
+        <div className="mt-6 text-center">
+          <Link
+            to="/login"
+            className="group inline-flex items-center text-amber-400 
+        hover:text-amber-600 transition-all duration-300"
+          >
+            <FaArrowLeft
+              className="mr-2 transform -translate-x-2 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 
+          transition-all duration-300"
+            />
+            <span className="transform group-hover:-translate-x-2 transition-all duration-300">
+              Back to Login
+            </span>
+          </Link>
+        </div>
       </div>
     </div>
   );
