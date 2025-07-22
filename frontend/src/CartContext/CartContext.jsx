@@ -51,7 +51,7 @@ export const CartProvider = ({ children }) => {
   }, [cart]);
 
   // calculate total cost and total item count
-  const cartTotal = cartItems.reduce(
+  const cartTotal = cart.reduce(
     (total, item) => total + item.price * item.quantity,
     0
   );

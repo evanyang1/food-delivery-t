@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { cardData, additionalData } from "../../assets/dummydata";
+import { useCart } from "../../CartContext/CartContext";
 
 const SpecialOffer = () => {
   const [showAll, setShowAll] = useState(false);
   const initialData = [...cardData, ...additionalData];
+  const { addToCart, updateQuantity, removeFromCart, cartItems } = useCart();
 
   return (
     <div className="bg-gradient-to-b from-[#1a1212] to-[#2a1e1e] text-white py-16 px-4 font-[Poppins]">
@@ -36,8 +38,21 @@ const SpecialOffer = () => {
               before:inset-0 hover:before:opacity-20"
                 >
                   <div className="relative h-72 overflow-hidden">
-                    <img src={item.image} alt={item.title} className="w-full h-full object-cover
-                    brightness-90 group-hover:brightness-110 transition-all duration-500 " /> 
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="w-full h-full object-cover
+                    brightness-90 group-hover:brightness-110 transition-all duration-500 "
+                    />
+                    <div
+                      className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent
+                    to-black/90 "
+                    />
+                    <div
+                      className="absolute bottom-4 left-4 right-4 flex justify-between items-center
+                    bg-black/40 backdrop-blur-sm px-4 py-2 rounded-full"
+                    />
+                    <span className="flex items-center gap-2 text-amber-400"></span>
                   </div>
                 </div>
               );
