@@ -5,8 +5,9 @@ import {
   commonTransition,
 } from "../../assets/dummydata";
 import { useCart } from "../../CartContext/CartContext";
-import { FaHeart, FaPlus, FaStar } from "react-icons/fa";
+import { FaFire, FaHeart, FaPlus, FaStar } from "react-icons/fa";
 import { HiPlus, HiMinus } from "react-icons/hi";
+import FloatingParticle from "../FloatingParticle/FloatingParticle";
 
 const SpecialOffer = () => {
   const [showAll, setShowAll] = useState(false);
@@ -135,11 +136,29 @@ const SpecialOffer = () => {
                     className="absolute inset-0 rounded-3xl pointer-events-none border-2 border-transparent
                   group-hover:border-amber-500/30 transition-all duration-500"
                   />
-                  <div className="opacity-0 group-hover:opacity-100">blah</div>
+                  <div className="opacity-0 group-hover:opacity-100">
+                    <FloatingParticle />
+                  </div>
                 </div>
               );
             }
           )}
+        </div>
+
+        <div className="mt-12 flex justify-center">
+          <button
+            onClick={() => setShowAll(!showAll)}
+            className="flex items-center gap-3 bg-gradient-to-r from-red-700 to-amber-700
+           text-white px-8 py-4 rounded-2xl font-bold text-lg uppercase tracking-wider hover:gap-4 hover:scale-105
+           hover:shadow-xl hover:shadow-amber-500/20 transition-all duration-300 group border-2 border-amber-300/20 relative
+           overflow-hidden"
+          >
+            <div
+              className="absolute inset-0 bg-gradient-to-r fill-amber-500/20 via-transparent to-amber-500/10
+            opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            />
+            <FaFire className="text-xl animate-pulse" />
+          </button>
         </div>
       </div>
     </div>
