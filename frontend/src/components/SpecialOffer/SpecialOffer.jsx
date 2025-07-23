@@ -1,6 +1,12 @@
 import React, { useState } from "react";
-import { cardData, additionalData } from "../../assets/dummydata";
+import {
+  cardData,
+  additionalData,
+  commonTransition,
+} from "../../assets/dummydata";
 import { useCart } from "../../CartContext/CartContext";
+import { FaHeart, FaPlus, FaStar } from "react-icons/fa";
+import { HiPlus, HiMinus } from "react-icons/hi";
 
 const SpecialOffer = () => {
   const [showAll, setShowAll] = useState(false);
@@ -51,9 +57,85 @@ const SpecialOffer = () => {
                     <div
                       className="absolute bottom-4 left-4 right-4 flex justify-between items-center
                     bg-black/40 backdrop-blur-sm px-4 py-2 rounded-full"
-                    />
-                    <span className="flex items-center gap-2 text-amber-400"></span>
+                    >
+                      <span className="flex items-center gap-2 text-amber-400">
+                        <FaStar className="text-xl drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]" />
+                        <span className="font-bold">{item.rating}</span>
+                      </span>
+                      <span className="flex items-center gap-2 text-red-400">
+                        <FaHeart className="text-xl animate-heartbeat" />
+                        <span className="font-bold">{item.hearts}</span>
+                      </span>
+                    </div>
                   </div>
+
+                  <div className="p-6 relative z-10">
+                    <h3
+                      className="text-2xl font-bold mb-2 bg-gradient-to-r from-amber-300 to-amber-500
+                    bg-clip-text text-transparent font-[Playfair Display] italic"
+                    >
+                      {item.title}
+                    </h3>
+                    <p className="text-gray-300 mb-5 text-sm leading-relaxed tracking-wide">
+                      {item.description}
+                    </p>
+                    <div className="flex items-center justify-between gap-4">
+                      <span className="text-2xl text-bold text-amber-400 flex-1">
+                        {item.price}
+                      </span>
+                      {cartItem ? (
+                        <div className="flex items-center gap-3">
+                          <button
+                            onClick={() => {
+                              quantity > 1
+                                ? updateQuantity(item.id, quantity - 1)
+                                : removeFromCart(item.id);
+                            }}
+                            className="w-8 h-8 rounded-full bg-amber-900/40 flex items-center
+                          justify-center hover:bg-amber-800/50 transition-all duration-200 active:scale-95"
+                          >
+                            <HiMinus className="w-4 h-4 text-amber-100" />
+                          </button>
+                          <span className="w-8 text-center text-amber-100 font-cinzel">
+                            {quantity}
+                          </span>
+                          <button
+                            onClick={() =>
+                              updateQuantity(item.id, quantity + 1)
+                            }
+                            className="w-8 h-8 rounded-full bg-amber-900/40 flex items-center
+                          justify-center hover:bg-amber-800/50 transition-all duration-200 active:scale-95"
+                          >
+                            <HiPlus className="w-4 h-4 text-amber-100" />
+                          </button>
+                        </div>
+                      ) : (
+                        <button
+                          onClick={() =>
+                            addToCart({
+                              ...item,
+                              name: item.title,
+                              price: parseFloat(item.price.replace("₹", "")),
+                            })
+                          }
+                          className={`${addButtonBase} ${addButtonHover} ${commonTransition}`}
+                        >
+                          <div
+                            className="absolute inset-0 bg-gradient-to-r from-amber-500/20 to-transparent
+                          opacity-0 hover:opacity-100 transition-opacity duration-300"
+                          />
+                          <FaPlus className="text-lg transition-transform" />
+                          <span className="relative z-10">Add</span>
+                        </button>
+                      )}
+                    </div>
+                  </div>
+
+                  <div
+                    className="absolute inset-0 rounded-3xl pointer-events-none border-2 border-transparent
+                  group-hover:border-amber-500/30 transition-all duration-500"
+                  />
+                  <div className="opacity-0 group-hover:opacity-100">blah</div>
                 </div>
               );
             }
