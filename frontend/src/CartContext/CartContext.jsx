@@ -66,7 +66,7 @@ export const CartProvider = ({ children }) => {
   };
 
   // dispatcher wrapped in useCallback for performance
-  const addToCart = useCallback((item, quantity) => {
+  const addToCart = useCallback((item, quantity = 1) => {
     dispatch({ type: "ADD_ITEM", payload: { item, quantity } });
   }, []);
 

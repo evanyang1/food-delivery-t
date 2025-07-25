@@ -8,11 +8,12 @@ import { useCart } from "../../CartContext/CartContext";
 import { FaFire, FaHeart, FaPlus, FaStar } from "react-icons/fa";
 import { HiPlus, HiMinus } from "react-icons/hi";
 import FloatingParticle from "../FloatingParticle/FloatingParticle";
+import { addButtonBase, addButtonHover } from "../../assets/dummydata";
 
 const SpecialOffer = () => {
   const [showAll, setShowAll] = useState(false);
   const initialData = [...cardData, ...additionalData];
-  const { addToCart, updateQuantity, removeFromCart, cartItems } = useCart();
+  const { addToCart, updateItemQuantity, removeFromCart, cart } = useCart();
 
   return (
     <div className="bg-gradient-to-b from-[#1a1212] to-[#2a1e1e] text-white py-16 px-4 font-[Poppins]">
@@ -34,8 +35,8 @@ const SpecialOffer = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
           {(showAll ? initialData : initialData.slice(0, 4)).map(
             (item, index) => {
-              const cartItem = cardData.find((ci) => ci.id === item.id);
-              const quantity = cartItem ? cartItem.quantity : 0;
+              const cartItem = cart.find((ci) => ci.id === item.id);
+              const quantity = cartItem?.quantity || 0;
               return (
                 <div
                   key={`${item.id}-${index}`}
@@ -87,11 +88,11 @@ const SpecialOffer = () => {
                       {cartItem ? (
                         <div className="flex items-center gap-3">
                           <button
-                            onClick={() => {
+                            onClick={() =>
                               quantity > 1
-                                ? updateQuantity(item.id, quantity - 1)
-                                : removeFromCart(item.id);
-                            }}
+                                ? updateItemQuantity(item.id, quantity - 1)
+                                : removeFromCart(item.id)
+                            }
                             className="w-8 h-8 rounded-full bg-amber-900/40 flex items-center
                           justify-center hover:bg-amber-800/50 transition-all duration-200 active:scale-95"
                           >
@@ -102,7 +103,7 @@ const SpecialOffer = () => {
                           </span>
                           <button
                             onClick={() =>
-                              updateQuantity(item.id, quantity + 1)
+                              updateItemQuantity(item.id, quantity + 1)
                             }
                             className="w-8 h-8 rounded-full bg-amber-900/40 flex items-center
                           justify-center hover:bg-amber-800/50 transition-all duration-200 active:scale-95"
@@ -117,7 +118,7 @@ const SpecialOffer = () => {
                               ...item,
                               name: item.title,
                               price: parseFloat(item.price.replace("₹", "")),
-                            })
+                            }, 1)
                           }
                           className={`${addButtonBase} ${addButtonHover} ${commonTransition}`}
                         >
@@ -158,6 +159,8 @@ const SpecialOffer = () => {
             opacity-0 group-hover:opacity-100 transition-opacity duration-300"
             />
             <FaFire className="text-xl animate-pulse" />
+            <span>{showAll ? "Show Less" : "Show More"}</span>
+            <div className="h-full w-1 bg-amber-400/30 absolute right-0 top-0 group-hover:animate-border-pulse" />
           </button>
         </div>
       </div>
