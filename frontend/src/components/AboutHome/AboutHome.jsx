@@ -1,4 +1,5 @@
 import React from "react";
+import { aboutfeature } from "../../assets/dummydata";
 
 const AboutHome = () => {
   return (
@@ -44,6 +45,22 @@ const AboutHome = () => {
               the passion that goes into each creation. We invite you to join us
               on this culinary journey, where every bite is a masterpiece."
             </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-8 px-4 sm:px-0">
+            {aboutfeature.map((item, i) => (
+                <div key={i} className="flex flex-col items-center justify-center gap-3 sm:gap-4 transition-transform
+                duration-300 p-4 sm:p-5 hover:translate-x-2">
+                    <div className={`p-3 sm:p-4 rounded-full bg-gradient-to-r ${item.color} 
+                    transition-transform duration-300 group-hover:scale-110`}>
+                        <item.icon className="text-2xl sm:text-3xl text-white" />
+                    </div>
+                    <div className="text-center">
+                        <h3 className="text-xl sm:text-2xl font-bold font-cursive">{item.title}</h3>
+                        <p className="opacity-80 text-sm sm:text-base">{item.text}</p>
+                    </div>
+                </div>
+            ))}
           </div>
         </div>
       </div>
