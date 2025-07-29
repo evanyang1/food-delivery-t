@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { useCart } from "../../CartContext/CartContext.jsx";
 import { dummyMenuData } from "../../assets/OmhDD";
 import { FaMinus, FaPlus } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const categories = [
   "Breakfast",
@@ -135,6 +136,18 @@ const OurHomeMenu = () => {
               </div>
             );
           })}
+        </div>
+
+        <div className="flex justify-center mt-16">
+          <Link
+            to="/menu"
+            className="bg-amber-900/30 border-2 border-amber-800/30 text-amber-100 px-8
+          sm:px-10 py-3 rounded-full font-cinzel uppercase tracking-widest transition-all duration-300
+          hover:bg-amber-800/40 hover:text-amber-50 hover:scale-105 hover:shadow-lg 
+          hover:shadow-amber-900/20 backdrop-blur-sm"
+          >
+            Explore Full Menu
+          </Link>
         </div>
       </div>
     </div>
