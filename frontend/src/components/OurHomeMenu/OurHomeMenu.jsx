@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { useCart } from "../../CartContext/CartContext.jsx";
 import { dummyMenuData } from "../../assets/OmhDD";
+import { FaMinus, FaPlus } from "react-icons/fa";
 
 const categories = [
   "Breakfast",
@@ -85,6 +86,51 @@ const OurHomeMenu = () => {
                   <p className="text-amber-100/80 text-xs sm:text-sm mb-4 font-cinzel leading-relaxed">
                     {item.description}
                   </p>
+                  <div className="mt-auto flex items-center gap-4 justify-between">
+                    <div className="bg-amber-100/10 backdrop-blur-sm px-3 py-1 rounded-2xl shadow-lg">
+                      <span className="text-xl font-bold text-amber-300 font-dancingscript">
+                        ${item.price}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      {quantity > 0 ? (
+                        <>
+                          <button
+                            className="w-8 h-8 rounded-full bg-amber-900/40 flex items-center
+                          justify-center hover:bg-amber-800/50 transition-colors"
+                            onClick={() =>
+                              quantity > 1
+                                ? addToCart(item, quantity - 1)
+                                : removeFromCart(item.id)
+                            }
+                          >
+                            <FaMinus className="text-amber-100" />
+                          </button>
+                          <span className="w-8 text-center text-amber-100">
+                            {quantity}
+                          </span>
+                          <button
+                            className="w-8 h-8 rounded-full bg-amber-900/40 flex items-center
+                          justify-center hover:bg-amber-800/50 transition-colors"
+                            onClick={() => addToCart(item, quantity + 1)}
+                          >
+                            <FaPlus className="text-amber-100" />
+                          </button>
+                        </>
+                      ) : (
+                        <button
+                          className="bg-amber-900/40 px-4 py-1.5 rounded-full
+                        font-cinzel text-xs uppercase sm:text-sm tracking-wider transition-transform duration-300
+                        hover:scale-110 hover:shadow-lg hover:shadow-amber-900/20 relative overflow-hidden
+                        border border-amber-800/50"
+                        >
+                          <span className="relative z-10 text-xs text-amber-100">
+                            Add to Cart
+                          </span>
+                        </button>
+                      )}
+                    </div>
+                  </div>
                 </div>
               </div>
             );
