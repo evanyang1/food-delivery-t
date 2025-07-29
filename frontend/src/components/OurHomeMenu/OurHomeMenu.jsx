@@ -74,6 +74,18 @@ const OurHomeMenu = () => {
                     className="max-h-full max-w-full object-contain transition-all duration-700"
                   />
                 </div>
+                <div className="p-4 sm:p-6 flex flex-col flex-grow">
+                  <div
+                    className="absolute top-0 left-1/2 -translate-x-1/2 w-16 h-1 bg-gradient-to-r from-transparent
+                  via-amber-800/50 to-transparent opacity-50 transition-all duration-300"
+                  />
+                  <h3 className="text-xl sm:text-2xl mb-2 font-dancing-script text-amber-100 transition-colors">
+                    {item.name}
+                  </h3>
+                  <p className="text-amber-100/80 text-xs sm:text-sm mb-4 font-cinzel leading-relaxed">
+                    {item.description}
+                  </p>
+                </div>
               </div>
             );
           })}
