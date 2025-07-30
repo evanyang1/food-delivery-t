@@ -3,6 +3,7 @@ import { useCart } from "../../CartContext/CartContext.jsx";
 import { dummyMenuData } from "../../assets/OmhDD";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import "./OurHomeMenu.css";
 
 const categories = [
   "Breakfast",
@@ -84,7 +85,7 @@ const OurHomeMenu = () => {
                   <h3 className="text-xl sm:text-2xl mb-2 font-dancing-script text-amber-100 transition-colors">
                     {item.name}
                   </h3>
-                  <p className="text-amber-100/80 text-xs sm:text-sm mb-4 font-cinzel leading-relaxed">
+                  <p className="text-amber-100/80 text-md sm:text-sm mb-4 font-cinzel leading-relaxed">
                     {item.description}
                   </p>
                   <div className="mt-auto flex items-center gap-4 justify-between">
@@ -120,6 +121,7 @@ const OurHomeMenu = () => {
                         </>
                       ) : (
                         <button
+                          onClick={() => addToCart(item, 1)}
                           className="bg-amber-900/40 px-4 py-1.5 rounded-full
                         font-cinzel text-xs uppercase sm:text-sm tracking-wider transition-transform duration-300
                         hover:scale-110 hover:shadow-lg hover:shadow-amber-900/20 relative overflow-hidden
