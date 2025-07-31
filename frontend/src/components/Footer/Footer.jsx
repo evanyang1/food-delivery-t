@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FaRegEnvelope } from "react-icons/fa";
 import { BiChevronRight } from "react-icons/bi";
+import { socialIcons } from "../../assets/dummydata";
 
 const navItems = [
   { name: "Home", link: "/" },
@@ -97,6 +98,56 @@ const Footer = () => {
                 </li>
               ))}
             </ul>
+          </div>
+
+          {/* right column */}
+          <div className="flex justify-center md:justify-end">
+            <div className="space-y-4">
+              <h3
+                className="text-xl font-semibold mb-4 border-l-4 border-amber-400 pl-3 font-merriweather italic
+               text-amber-300"
+              >
+                Social Connect
+              </h3>
+              <div className="flex space-x-4">
+                {socialIcons.map(({ icon: Icon, link, color, label }, idx) => (
+                  <a
+                    target="_blank"
+                    href={link}
+                    key={idx}
+                    className="text-2xl bg-amber-400/10 p-3 rounded-full hover:bg-amber-400/20 hover:scale-105
+                   transition-all duration-300 relative group"
+                    style={{ color }}
+                  >
+                    <Icon className="hover:scale-125 transition-transform" />
+                    <span
+                      className="absolute -bottom-8 left-1/2 -translate-x-1/2 bg-amber-400 
+                    text-black px-2 py-1 rounded text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity"
+                    >
+                      {label}
+                    </span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* bottom section */}
+        <div className="mt-8 border-t border-amber-900/30 pt-8 text-center">
+          <p className="text-lg text-amber-200/80 font-playfair">
+            &copy; {new Date().getFullYear()} Foodie Frenzy. All rights
+            reserved.
+          </p>
+          <div className="group inline-block">
+            <a
+              href="https://hexagondigitalservices.com/"
+              target="_blank"
+              className="text-lg font-sacramento bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400
+            bg-clip-text text-transparent hover:text-purple-300 transition-all duration-500"
+            >
+              Designed by Hexagon Digital Services
+            </a>
           </div>
         </div>
       </div>
