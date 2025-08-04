@@ -155,14 +155,15 @@ const About = () => {
                         {s.label}
                       </motion.div>
                     </div>
-                        <motion.div className="absolute inset-0 bg-amber-900/10 rounded-xl"
-                        initial={{ opacity: 0}}
-                        animate={{ opacity: hoveredStat === i ? 1 : 0}} />
-
+                    <motion.div
+                      className="absolute inset-0 bg-amber-900/10 rounded-xl"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: hoveredStat === i ? 1 : 0 }}
+                    />
                   </div>
                 </motion.div>
                 <motion.div
-                  className="absolute inset-x-4 botton-0 h-8 bg-amber-900/30 blur-xl rounded-xl
+                  className="absolute inset-x-4 bottom-0 h-8 bg-amber-900/30 blur-xl rounded-xl
                     "
                   animate={{
                     opacity: hoveredStat === i ? 0.4 : 0.2,
@@ -172,6 +173,55 @@ const About = () => {
               </motion.div>
             );
           })}
+        </div>
+      </section>
+
+      <section className="py-16 px-4 md:px-8 relative">
+        <div className="max-w-7xl mx-auto">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="text-4xl font-serif sm:text-5xl md:text-6xl font-bold text-center mb-12 text-amber-100"
+          >
+            Meet Our <span className="text-amber-500">Culinary Team</span>
+          </motion.h2>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 lg:gap-12">
+            {teamMembers.map((m, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "0px 0px -100px 0px" }}
+                transition={{ delay: m.delay }}
+                className="relative group"
+              >
+                <div
+                  className="relative h-full bg-[#3c2a21]/90 backdrop-blur-lg rounded-3xl overflow-hidden 
+                border-2 border-amber-600/30 hover:border-amber-500 transition-all duration-500 shadow-xl
+                hover:shadow-2xl hover:shadow-amber-500/20"
+                >
+                  <div className="relative h-64 sm:h-72 md:h-96 overflow-hidden">
+                    <motion.img
+                      src={m.img}
+                      alt={m.name}
+                      className="w-full h-full object-cover"
+                      initial={{ scale: 1 }}
+                      whileHover={{ scale: 1.1 }}
+                      transition={{ duration: 0.5 }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#3c2a21] to-transparent" />
+                  </div>
+                  <div className="p-6 text-center">
+                    <h3 className="text-xl font-bold text-amber-100 font-serif">
+                      {m.name}
+                    </h3>
+                    <p className="text-amber-400 italic">{m.role}</p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
     </div>
