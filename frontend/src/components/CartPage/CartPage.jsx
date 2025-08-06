@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useCart } from "../../CartContext/CartContext";
 import { Link } from "react-router-dom";
-import { FaMinus } from "react-icons/fa";
+import { FaMinus, FaPlus, FaTrash, FaTimes } from "react-icons/fa";
 
 const CartPage = () => {
   const { cart, removeFromCart, updateItemQuantity, clearCart, cartTotal } =
@@ -81,15 +81,91 @@ const CartPage = () => {
                       className="w-8 h-8 rounded-full bg-amber-900/40 flex items-center justify-center hover:bg-amber-800/50
                       transition-all duration-200 active:scale-95"
                     >
-                      <FaMinus className="w-8 text-center text-amber-100 font-cinzel" />
+                      <FaMinus className="w-4 h-4  text-amber-100 " />
                     </button>
+                    <span className="w-8 text-center text-amber-100 font-cinzel">
+                      {item.quantity}
+                    </span>
+                    <button
+                      onClick={() =>
+                        updateItemQuantity(item.id, item.quantity + 1)
+                      }
+                      className="w-8 h-8 rounded-full bg-amber-900/40 flex items-center justify-center hover:bg-amber-800/50
+                      transition-all duration-200 active:scale-95"
+                    >
+                      <FaPlus className="w-4 h-4  text-amber-100 " />
+                    </button>
+                  </div>
+
+                  <div className="flex items-center justify-between w-full">
+                    <button
+                      onClick={() => removeFromCart(item.id)}
+                      className="bg-amber-900/40 px-3 py-1 rounded-full font-cinzel text-xs uppercase 
+                      transition-all duration-300 hover:bg-amber-800/50 flex items-center gap-1 active:scale-95"
+                    >
+                      <FaTrash className="w-4 h-4 text-amber-100" />
+                      <span className="text-amber-100">Remove</span>
+                    </button>
+                    <p className="text-amber-100/80 font-cinzel">
+                      {item.price * item.quantity}
+                    </p>
                   </div>
                 </div>
               ))}
             </div>
+
+            <div className="mt-12 pt-8 border-t border-amber-800/30 animate-fade-in-up">
+              <div className="flex flex-col sm:flex-row justify-between items-center gap-8">
+                <Link
+                  to="/menu"
+                  className="bg-amber-900/40 px-8 py-3 rounded-full font-cinzel uppercase
+                tracking-wider hover:bg-amber-800/50 transition-all duration-300 text-amber-100 inline-flex 
+                items-center gap-2 hover:gap-3 active:scale-95 "
+                >
+                  Continue Shopping
+                </Link>
+
+                <div className="flex items-center gap-8">
+                  <h2 className="text-3xl font-dancing-script text-amber-100">
+                    Total: ${cartTotal}
+                  </h2>
+                  <button
+                    className="bg-amber-900/40 px-8 py-3 rounded-full font-cinzel uppercase
+                tracking-wider hover:bg-amber-800/50 transition-all duration-300 text-amber-100 flex 
+                items-center gap-2  active:scale-95 "
+                  >
+                    Checkout Now
+                  </button>
+                </div>
+              </div>
+            </div>
           </>
         )}
       </div>
+
+      {selectedImage && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-amber-900/40 bg-opacity-75 backdrop-blur-sm
+        p-4 overflow-auto "
+          onClick={() => setSelectedImage(null)}
+        >
+          <div className="relative max-w-full max-h-full">
+            <img
+              src={selectedImage}
+              alt="Full View"
+              className="max-w-[90vw] max-h-[80vh] rounded-lg object-contain"
+            />
+            <button
+              onClick={() => setSelectedImage(null)}
+              className="absolute top-1 right-1 
+            bg-amber-900/80 rounded-full p-2 text-black hover:bg-amber-800/90 transition-transform duration-200
+            active:scale-90"
+            >
+              <FaTimes className="w-6 h-6" />
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
