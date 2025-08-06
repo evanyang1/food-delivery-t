@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useCart } from "../../CartContext/CartContext";
 import { Link } from "react-router-dom";
+import { FaMinus } from "react-icons/fa";
 
 const CartPage = () => {
   const { cart, removeFromCart, updateItemQuantity, clearCart, cartTotal } =
@@ -67,6 +68,21 @@ const CartPage = () => {
                     <p className="text-amber-100/80 font-cinzel mt-1">
                       {item.price}
                     </p>
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    <button
+                      onClick={() =>
+                        updateItemQuantity(
+                          item.id,
+                          Math.max(1, item.quantity - 1)
+                        )
+                      }
+                      className="w-8 h-8 rounded-full bg-amber-900/40 flex items-center justify-center hover:bg-amber-800/50
+                      transition-all duration-200 active:scale-95"
+                    >
+                      <FaMinus className="w-8 text-center text-amber-100 font-cinzel" />
+                    </button>
                   </div>
                 </div>
               ))}
