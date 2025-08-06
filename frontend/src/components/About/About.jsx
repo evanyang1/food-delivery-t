@@ -212,11 +212,20 @@ const About = () => {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#3c2a21] to-transparent" />
                   </div>
-                  <div className="p-6 text-center">
-                    <h3 className="text-xl font-bold text-amber-100 font-serif">
-                      {m.name}
-                    </h3>
-                    <p className="text-amber-400 italic">{m.role}</p>
+
+                  <div className="p-8 text-center flex flex-col h-calc(100% - 24rem)">
+                    <div className="mb-4">
+                      <h3 className="text-3xl font-bold text-amber-100 font-serif">
+                        {m.name}
+                      </h3>
+                      <p className="text-amber-500 italic">{m.role}</p>
+                    </div>
+
+                    <p className="text-amber-100/80 text-lg font-cursive flex-grow">
+                      {m.bio}
+                    </p>
+
+                    
                   </div>
                 </div>
               </motion.div>
