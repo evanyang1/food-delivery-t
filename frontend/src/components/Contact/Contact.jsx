@@ -1,5 +1,6 @@
 import React from "react";
 import toast, { Toaster } from "react-hot-toast";
+import { FiMapPin } from "react-icons/fi";
 
 const Contact = () => {
   return (
@@ -34,6 +35,19 @@ const Contact = () => {
                 className="absolute inset-0 bg-gradient-to-r from-amber-500/10 to-transparent opacity-0
               group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"
               />
+
+              <div className="flex items-center mb-4 relative z-10">
+                <div className="p-3 bg-gradient-to-br from-amber-500/30 to-amber-700/30 rounded-xl">
+                  <FiMapPin className="text-amber-400 text-2xl animate-pulse" />
+                </div>
+                <h3 className="ml-4 text-amber-100 text-xl font-semibold">
+                  Our Headquarters
+                </h3>
+              </div>
+
+              <div className="pl-12 relative z-10">
+                <p className="text-amber-100 font-light text-lg">Paris, TX</p>
+              </div>
             </div>
           </div>
         </div>
