@@ -214,7 +214,7 @@ const Contact = () => {
               flex items-center justify-center space-x-2 group"
               >
                 <span>Submit Query</span>
-                <FiArrowRight className="w-5 h-5 group-hover:translate-x-1 duration-300" />
+                <FiArrowRight className="w-5 h-5 group-hover:translate-x-1 duration-300 transition-transform" />
               </button>
             </form>
           </div>
