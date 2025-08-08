@@ -13,6 +13,35 @@ const Contact = () => {
     query: "",
   });
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Form submitted:", formData);
+    toast.success("Your query has been submitted successfully!", {
+      style: {
+        border: "2px solid #f59e0b",
+        padding: "16px",
+        color: "#fff",
+        background: "rgba(0,0,0,0.8)",
+        backdropFilter: "blur(10px)",
+      },
+      iconTheme: {
+        primary: "#f59e0b",
+        secondary: "#fff",
+      },
+    });
+    setFormData({
+      name: "",
+      phone: "",
+      email: "",
+      address: "",
+      dish: "",
+      query: "",
+    });
+  };
+
+  const handleChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+
   return (
     <div
       className="min-h-screen bg-gradient-to-r from-orange-900 via-amber-900 to-gray-900 animate-gradient-x py-12
@@ -116,7 +145,41 @@ const Contact = () => {
           <div
             className="relative bg-white/5 backdrop-blur-lg rounded-2xl p-8 shadow-2xl 
           animate-slide-in-right border-2 border-amber-500/30 hover:border-amber-500/50 duration-300"
-          ></div>
+          >
+            <div className="absolute -top-4 -right-4 w-12 h-12 bg-amber-500/30 rounded-full" />
+
+            <form
+              className="relative bg-white/5 backdrop-blur-lg rounded-2xl p-6 shadow-2xl animate-slide-in-right border-2 
+            border-amber-500/30 hover:border-amber-500/50 transform-border duration-300"
+            >
+              {contactFormFields.map(
+                ({ label, name, type, placeholder, pattern, Icon }) => (
+                  <div key={name}>
+                    <label className="block text-amber-100 text-sm font-medium mb-2 mt-3">
+                      {label}
+                    </label>
+                    <div className="relative">
+                      <div className="absolute left-3 top-1/2 transform -translate-y-1/2">
+                        <Icon className="text-amber-500 text-xl animate-pulse" />
+                      </div>
+                      <input
+                        type={type}
+                        name={name}
+                        value={formData[name]}
+                        onChange={handleChange}
+                        className="w-full pl-10 pr-4 py-3 bg-white/10 border-2 border-amber-500/30 rounded-xl 
+                        text-amber-50 focus:ring-2 focus:ring-amber-500/50 focus:border-transparent
+                        placeholder-amber-200/50"
+                        placeholder={placeholder}
+                        pattern={pattern}
+                        required
+                      />
+                    </div>
+                  </div>
+                )
+              )}
+            </form>
+          </div>
         </div>
       </div>
     </div>
