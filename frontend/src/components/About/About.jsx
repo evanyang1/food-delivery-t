@@ -163,7 +163,7 @@ const About = () => {
                   </div>
                 </motion.div>
                 <motion.div
-                  className="absolute inset-x-4 bottom-0 h-8 bg-amber-900/30 blur-xl rounded-xl
+                  className="absolute inset-x-4 botton-0 h-8 bg-amber-900/30 blur-xl rounded-xl
                     "
                   animate={{
                     opacity: hoveredStat === i ? 0.4 : 0.2,
