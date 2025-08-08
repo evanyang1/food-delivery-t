@@ -1,8 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
-import { FiGlobe, FiMapPin, FiPhone } from "react-icons/fi";
+import { FiGlobe, FiMail, FiMapPin, FiPhone } from "react-icons/fi";
+import { contactFormFields } from "../../assets/dummydata";
 
 const Contact = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    address: "",
+    dish: "",
+    query: "",
+  });
+
   return (
     <div
       className="min-h-screen bg-gradient-to-r from-orange-900 via-amber-900 to-gray-900 animate-gradient-x py-12
@@ -70,11 +80,43 @@ const Contact = () => {
 
               <div className="pl-12 relative z-10">
                 <p className="text-amber-100 font-light text-lg flex items-center">
-                  <FiGlobe className="text-green-400 text-xl mr-4"/> 123-456-7890
+                  <FiGlobe className="text-green-400 text-xl mr-4" />{" "}
+                  123-456-7890
+                </p>
+              </div>
+            </div>
+
+            <div
+              className="relative bg-white/5 backdrop-blur-lg rounded-2xl p-6 shadow-2xl transform transition-all 
+                duration-300 hover:scale-[1.02] animate-card-float border-l-4 border-orange-500 hover:border-orange-400 group"
+            >
+              <div
+                className="absolute inset-0 bg-gradient-to-r from-amber-500/10 to-transparent opacity-0
+              group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"
+              />
+
+              <div className="flex items-center mb-4 relative z-10">
+                <div className="p-3 bg-gradient-to-br from-orange-500/10 to-orange-700/10 rounded-xl">
+                  <FiMail className="text-orange-400 text-2xl" />
+                </div>
+                <h3 className="ml-4 text-amber-100 text-xl font-semibold">
+                  Email
+                </h3>
+              </div>
+
+              <div className="pl-12 relative z-10">
+                <p className="text-amber-100 font-light text-lg flex items-center">
+                  evanjyang4@gmail.com
                 </p>
               </div>
             </div>
           </div>
+
+          {/* Contact form section */}
+          <div
+            className="relative bg-white/5 backdrop-blur-lg rounded-2xl p-8 shadow-2xl 
+          animate-slide-in-right border-2 border-amber-500/30 hover:border-amber-500/50 duration-300"
+          ></div>
         </div>
       </div>
     </div>
