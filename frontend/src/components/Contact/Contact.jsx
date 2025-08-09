@@ -156,7 +156,6 @@ const Contact = () => {
             <div className="absolute -top-4 -right-4 w-12 h-12 bg-amber-500/30 rounded-full" />
 
             <form
-              onSubmit={handleSubmit}
               className="relative bg-white/5 backdrop-blur-lg rounded-2xl p-6 shadow-2xl animate-slide-in-right border-2 
             border-amber-500/30 hover:border-amber-500/50 transform-border duration-300"
             >
@@ -198,8 +197,6 @@ const Contact = () => {
                   <textarea
                     rows="4"
                     name="query"
-                    value={formData.query}
-                    onChange={handleChange}
                     className="w-full pl-10 pr-4 py-3 bg-white/10 border-2 border-amber-500/30 rounded-xl 
                         text-amber-50 focus:ring-2 focus:ring-amber-500/50 focus:border-transparent
                         placeholder-amber-200/50"
